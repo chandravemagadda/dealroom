@@ -172,8 +172,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Documents
 function loadDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all',
-	place : source
+        fields : '@all'
+	//place : source
     }).execute(onDocFetch);
 }
 
@@ -195,6 +195,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
+	loadTasks(templateSpace);
 	}
 }
 
@@ -219,8 +220,7 @@ function onGroupCreated(response) {
 	gMessage.innerHTML = "Group successfully created. <br /> Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the group";
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
-    loadDocuments(templateSpace);
-	loadTasks(templateSpace);
+    loadDocuments(templateSpace);	
 
 	//Project creation within the newly created group
 	

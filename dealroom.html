@@ -161,6 +161,39 @@ function onTaskFetch(response) {
     console.log ("Final Tasks: "+JSON.stringify(tasks));
 }
 
+//Fetching Files
+function onFilesFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch files: " + response.error.message);
+        return;
+    }
+    var files = response.list;
+	console.log ("Files: "+JSON.stringify(files));
+	var postTask;
+	
+	$.each(tasks, function(index, group) {
+	postFile = {
+	type : "",
+	subject : "",
+	content : {
+		text : "",
+		type : ""
+	},
+	dueDate : "",
+	parent : ""
+	}
+	
+	postFile.type = group.type;
+	postFile.dueDate = group.dueDate;
+	postFile.subject = group.subject;
+	postFile.content = group.content;
+	postFile.parent = targetGroupID;
+	console.log ("File "+index+" :"+JSON.stringify(postFile));
+	osapi.jive.corev3.statics.create(postFile).execute(onContentCreated);
+	});
+    console.log ("Final Files: "+JSON.stringify(files));
+}
+
 //Loading Discussions
 function loadDiscussions(source) {
 osapi.jive.corev3.discussions.get ({
@@ -184,6 +217,15 @@ osapi.jive.corev3.tasks.get({
 	place : source
     }).execute(onTaskFetch);
 }
+
+//Loading Tasks
+function loadFiles(source) {
+osapi.jive.corev3.statics.get({
+        fields : '@all',
+	uri : source
+    }).execute(onFilesFetch);
+}
+
 // Defines what needs to be done once Project is created
 
 function onProjectCreated(response) {
@@ -195,7 +237,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProject);
+	//loadTasks(templateProject);
 	}
 }
 
@@ -220,7 +262,8 @@ function onGroupCreated(response) {
 	gMessage.innerHTML = "Group successfully created. <br /> Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the group";
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
-    loadDocuments(templateSpace);	
+    loadDocuments(templateSpace);
+    loadFiles(templateSpace);	
 
 	//Project creation within the newly created group
 	

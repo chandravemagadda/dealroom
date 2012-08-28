@@ -141,21 +141,19 @@ function onTaskFetch(response) {
 	$.each(tasks, function(index, group) {
 	postTask = {
 	type : "",
-	tags : [],
 	subject : "",
 	content : {
 		text : "",
 		type : ""
 	},
-	question : "",
+	dueDate : "",
 	parent : ""
 	}
 	
 	postTask.type = group.type;
-	postTask.tags = group.tags;
+	postTask.dueDate = group.dueDate;
 	postTask.subject = group.subject;
 	postTask.content = group.content;
-	postTask.question = group.question;
 	postTask.parent = targetGroupID;
 	console.log ("Task "+index+" :"+JSON.stringify(postTask));
 	osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);

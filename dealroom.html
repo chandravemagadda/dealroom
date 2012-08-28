@@ -92,6 +92,40 @@ function onDiscFetch(response) {
     //console.log ("Discussions: "+JSON.stringify(discussions));
 }
 
+function onDocFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch documents: " + response.error.message);
+        return;
+    }
+    var documents = response.list;
+	console.log ("Documents: "+JSON.stringify(documents));
+	var postDoc;
+	
+	$.each(documents, function(index, group) {
+	postDoc = {
+	type : "",
+	tags : [],
+	subject : "",
+	content : {
+		text : "",
+		type : ""
+	},
+	question : "",
+	parent : ""
+	}
+	
+	postDoc.type = group.type;
+	postDoc.tags = group.tags;
+	postDoc.subject = group.subject;
+	postDoc.content = group.content;
+	postDoc.question = group.question;
+	postDoc.parent = targetGroupID;
+	console.log ("Document "+index+" :"+JSON.stringify(postDoc));
+	osapi.jive.corev3.discussions.create(postDoc).execute(onContentCreated);
+	});
+    console.log ("Final Documents: "+JSON.stringify(documents));
+}
+
 function loadDiscussions(source) {
 osapi.jive.corev3.discussions.get ({
         fields : '@all',
@@ -99,6 +133,13 @@ osapi.jive.corev3.discussions.get ({
     }).execute(onDiscFetch);
 }
 
+//Loading Documents
+function loadDocuments(source) {
+osapi.jive.corev3.documents.get ({
+        fields : '@all',
+	place : source
+    }).execute(onDocFetch);
+}
 
 // Defines what needs to be done once Project is created
 
@@ -135,7 +176,7 @@ function onGroupCreated(response) {
 	gMessage.innerHTML = "Group successfully created. <br /> Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the group";
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
-
+    loadDocuments(templateSpace);
 
 	//Project creation within the newly created group
 	

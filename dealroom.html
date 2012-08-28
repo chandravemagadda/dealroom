@@ -214,7 +214,7 @@ function onPollFetch(response) {
 		text : "",
 		type : ""
 	},
-	question : "",
+	options :[],
 	parent : ""
 	}
 	
@@ -222,7 +222,7 @@ function onPollFetch(response) {
 	postPoll.tags = group.tags;
 	postPoll.subject = group.subject;
 	postPoll.content = group.content;
-	postPoll.question = group.question;
+	postPoll.options = group.options;
 	postPoll.parent = targetGroupID;
 	console.log ("Poll "+index+" :"+JSON.stringify(postPoll));
 	osapi.jive.corev3.polls.create(postPoll).execute(onContentCreated);

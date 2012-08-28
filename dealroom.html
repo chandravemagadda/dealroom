@@ -169,29 +169,65 @@ function onFilesFetch(response) {
     }
     var files = response.list;
 	console.log ("Files: "+JSON.stringify(files));
-	var postTask;
+	var postFile;
 	
-	$.each(tasks, function(index, group) {
+	$.each(files, function(index, group) {
 	postFile = {
 	type : "",
+	tags : [],
 	subject : "",
 	content : {
 		text : "",
 		type : ""
 	},
-	dueDate : "",
+	question : "",
 	parent : ""
 	}
 	
 	postFile.type = group.type;
-	postFile.dueDate = group.dueDate;
+	postFile.tags = group.tags;
 	postFile.subject = group.subject;
 	postFile.content = group.content;
+	postFile.question = group.question;
 	postFile.parent = targetGroupID;
 	console.log ("File "+index+" :"+JSON.stringify(postFile));
 	osapi.jive.corev3.statics.create(postFile).execute(onContentCreated);
 	});
     console.log ("Final Files: "+JSON.stringify(files));
+}
+
+//Fetching Polls
+function onPollFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch polls: " + response.error.message);
+        return;
+    }
+    var polls = response.list;
+	var postPoll;
+	
+	$.each(polls, function(index, group) {
+	postPoll = {
+	type : "",
+	tags : [],
+	subject : "",
+	content : {
+		text : "",
+		type : ""
+	},
+	question : "",
+	parent : ""
+	}
+	
+	postPoll.type = group.type;
+	postPoll.tags = group.tags;
+	postPoll.subject = group.subject;
+	postPoll.content = group.content;
+	postPoll.question = group.question;
+	postPoll.parent = targetGroupID;
+	console.log ("Poll "+index+" :"+JSON.stringify(postPoll));
+	osapi.jive.corev3.polls.create(postPoll).execute(onContentCreated);
+	});
+    //console.log ("Polls: "+JSON.stringify(polls));
 }
 
 //Loading Discussions
@@ -218,12 +254,20 @@ osapi.jive.corev3.tasks.get({
     }).execute(onTaskFetch);
 }
 
-//Loading Tasks
+//Loading Files
 function loadFiles(source) {
 osapi.jive.corev3.statics.get({
         fields : '@all',
 	uri : source
     }).execute(onFilesFetch);
+}
+
+//Loading Polls
+function loadPolls(source) {
+osapi.jive.corev3.polls.get({
+        fields : '@all',
+	place : source
+    }).execute(onPollFetch);
 }
 
 // Defines what needs to be done once Project is created
@@ -264,6 +308,7 @@ function onGroupCreated(response) {
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
     loadFiles(templateSpace);	
+	loadPolls(templateSpace);
 
 	//Project creation within the newly created group
 	

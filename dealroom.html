@@ -11,7 +11,7 @@
 // Templates' IDs for the current AI instance
 var templateSpace = "/places/1060"; //actually, a SPACE
 var templateSpaceURI = "https://accenture.jiveon.com/community/deal-room-template";
-var templateProject = "/places/1001";
+var templateProject = "/places/1029";
 var templateProjectURI = "https://accenture.jiveon.com/community/deal-room-template/projects/rfp-response-template-project";
 
 // Flag indicating we are in add mode
@@ -172,8 +172,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Documents
 function loadDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all'
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onDocFetch);
 }
 
@@ -195,7 +195,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateSpace);
+	loadTasks(templateProject);
 	}
 }
 

@@ -173,23 +173,13 @@ function onFilesFetch(response) {
 	
 	$.each(files, function(index, group) {
 	postFile = {
+	
 	type : "",
-	tags : [],
-	subject : "",
-	content : {
-		text : "",
-		type : ""
-	},
-	question : "",
-	parent : ""
+	filename : ""
 	}
 	
 	postFile.type = group.type;
-	postFile.tags = group.tags;
-	postFile.subject = group.subject;
-	postFile.content = group.content;
-	postFile.question = group.question;
-	postFile.parent = targetGroupID;
+	postFile.filename = group.filename;
 	console.log ("File "+index+" :"+JSON.stringify(postFile));
 	osapi.jive.corev3.statics.create(postFile).execute(onContentCreated);
 	});
@@ -307,7 +297,7 @@ function onGroupCreated(response) {
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
-    //loadFiles(templateSpace);	
+    loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 
 	//Project creation within the newly created group

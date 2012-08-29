@@ -297,8 +297,8 @@ osapi.jive.corev3.polls.get({
 function loadCheckPoints(source) {
 console.log ("Check Points:lllllllllllllllllllllllllllll ");
 osapi.jive.corev3.places.Project.getCheckpoints({
-        fields : '@all',
-	place : source
+        fields : '@all'//,
+	//place : source
     }).execute(onCheckPointFetch);
 }
 

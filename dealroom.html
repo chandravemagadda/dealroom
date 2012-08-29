@@ -162,7 +162,7 @@ function onTaskFetch(response) {
 }
 
 //Fetching Files
-function onFilesFetch(response) {
+function onFileFetch(response) {
     if (response.error) {
         mini.createDismissibleMessage("Unable to fetch files: " + response.error.message);
         return;
@@ -238,9 +238,9 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
-osapi.jive.corev3.contents.Task.get({
-        fields : '@all'//,
-	//place : source
+osapi.jive.corev3.tasks.get({
+        fields : '@all',
+	place : source
     }).execute(onTaskFetch);
 }
 
@@ -249,7 +249,7 @@ function loadFiles(source) {
 osapi.jive.corev3.statics.get({
         fields : '@all',
 	uri : source
-    }).execute(onFilesFetch);
+    }).execute(onFileFetch);
 }
 
 //Loading Polls
@@ -271,7 +271,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProject);
+	//loadTasks(templateProject);
 	}
 }
 
@@ -297,7 +297,7 @@ function onGroupCreated(response) {
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
-    //loadFiles(templateSpace);	
+    loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 
 	//Project creation within the newly created group

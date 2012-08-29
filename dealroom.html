@@ -238,9 +238,9 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
-osapi.jive.corev3.tasks.get({
-        fields : '@all',
-	place : source
+osapi.jive.corev3.contents.Task.get({
+        fields : '@all'//,
+	//place : source
     }).execute(onTaskFetch);
 }
 

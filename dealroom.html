@@ -64,10 +64,10 @@ osapi.jive.corev3.statics = {
      * @availability Available to place administrators only
      * @retrieves {@link StaticEntity} describing the specified static resource
      */
-    get: function(opts) {
+    get: function("/places/1029") {
         return osapi.jive.core["get"]({
-            href: "/statics/" + opts.uri,
-            params: buildParams(opts),
+            href: "/statics/" + "1029",
+            params: buildParams("/places/1029"),
             v: "v3"
         })
     }

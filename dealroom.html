@@ -175,11 +175,11 @@ function onFileFetch(response) {
 	postFile = {
 	
 	type : "",
-	filename : ""
+	filename : "sample"
 	}
 	
 	postFile.type = group.type;
-	postFile.filename = group.filename;
+	//postFile.filename = group.filename;
 	console.log ("File "+index+" :"+JSON.stringify(postFile));
 	osapi.jive.corev3.statics.create(postFile).execute(onContentCreated);
 	});
@@ -297,7 +297,7 @@ function onGroupCreated(response) {
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
-    loadFiles(templateSpace);	
+    loadFiles(templateProject);	
 	loadPolls(templateSpace);
 
 	//Project creation within the newly created group

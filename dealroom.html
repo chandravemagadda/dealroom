@@ -156,7 +156,7 @@ function onTaskFetch(response) {
 	postTask.content = group.content;
 	postTask.parent = targetGroupID;
 	console.log ("Task "+index+" :"+JSON.stringify(postTask));
-	osapi.jive.corev3.contents.Task.createTask(postTask).execute(onContentCreated);
+	osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);
 	});
     console.log ("Final Tasks: "+JSON.stringify(tasks));
 }
@@ -238,8 +238,8 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
-osapi.jive.corev3.contents.Task.get({
-        fields : '@all'
+osapi.jive.corev3.places.Project.getTasks({
+        fields : '@all'//,
 	//place : source
     }).execute(onTaskFetch);
 }

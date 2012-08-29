@@ -248,7 +248,7 @@ function onCheckPointFetch(response) {
 	postCheckpoint.options = group.options;
 	postCheckpoint.parent = targetGroupID;
 	console.log ("CheckPoint "+index+" :"+JSON.stringify(postCheckpoint));
-	osapi.jive.corev3.places.CheckPoint.setCheckpoints(postCheckpoint).execute(onContentCreated);
+	osapi.jive.corev3.places.Project.setCheckpoints(postCheckpoint).execute(onContentCreated);
 	});
     //console.log ("Check Points: "+JSON.stringify(checkpoints));
 }
@@ -295,7 +295,7 @@ osapi.jive.corev3.polls.get({
 
 //Loading Check Points
 function loadCheckPoints(source) {
-osapi.jive.corev3.places.CheckPoint.getCheckpoints({
+osapi.jive.corev3.places.Project.getCheckpoints({
         fields : '@all',
 	place : source
     }).execute(onCheckPointFetch);

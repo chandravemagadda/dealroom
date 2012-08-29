@@ -274,7 +274,7 @@ osapi.jive.corev3.documents.get ({
 function loadTasks(source) {
 osapi.jive.corev3.tasks.get({
         fields : '@all',
-	place : source
+	uri : source
     }).execute(onTaskFetch);
 }
 
@@ -311,8 +311,8 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	//loadTasks(templateProject);
-	loadCheckPoints(templateProject);
+	loadTasks(templateProjectURI);
+	//loadCheckPoints(templateProject);
 	}
 }
 

@@ -7,71 +7,7 @@
 <link type="text/css" href="css/security-groups.css" rel="stylesheet"/>
 
 <script type="text/javascript">
-/*
- * Jive Software licenses this file to you under the Apache
- * License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 
-// This source file is generated from object definitions and metadata. It is
-// not intended to replace the generated library in any way. This source is
-// provided as an alternative reference that is more much more straight forward
-// to comprehend than the generated library.
-
-osapi.jive.corev3.statics = {
-
-    /**
-     * <p>Create metadata about a new static resource (without uploading the actual content).</p>
-     *
-     * <p>The minimum information needed to create a new static resource is:</p>
-     * <pre class="entity-example">
-     *     {
-     *         "filename" : "{filename}",
-     *         "placeURI" : "{URI of the place this static resource is associated with}"
-     *     }
-     * </pre>
-     *
-     * @param fields Names of the fields to be returned
-     *
-     * @availability Available to place administrators only
-     * @takes JSON object describing the characteristics of the static resource to be created
-     * @retrieves {@link StaticEntity} describing the newly created static resource
-     */
-    create: function(opts) {
-        return osapi.jive.core["post"]({
-            href: "/statics",
-            data: json.stingify(opts),
-            v: "v3"
-        })
-    },
-
-    /**
-     * <p>Return metadata about the specified static resource.</p>
-     *
-     * @param fields Names of the fields to be returned
-     * @param uri URI of the requested static resource
-     *
-     * @availability Available to place administrators only
-     * @retrieves {@link StaticEntity} describing the specified static resource
-     */
-    get: function("places/1029") {
-        return osapi.jive.core["get"]({
-            href: "/statics/" + "1029",
-            params: buildParams("places/1029"),
-            v: "v3"
-        })
-    }
-};
 // Templates' IDs for the current AI instance
 var templateSpace = "/places/1060"; //actually, a SPACE
 var templateSpaceURI = "https://accenture.jiveon.com/community/deal-room-template";
@@ -336,6 +272,13 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
+osapi.jive.corev3.places.Project.createTask({
+  "subject": "Clean the carpet",
+  "dueDate" : "2013-07-12T06:59:59.999+0000",
+  "type": "task"
+ });
+ var str=osapi.jive.corev3.contents.Task.toURI();
+ console.log("URI : "+str);
 osapi.jive.corev3.tasks.get({
         fields : '@all',
 	place : source
@@ -360,7 +303,8 @@ osapi.jive.corev3.polls.get({
 
 //Loading Check Points
 function loadCheckPoints(source) {
-osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
+var val= osapi.jive.corev3.places.Project.getCheckpoints();
+console.log(val.value);
 }
 
 // Defines what needs to be done once Project is created
@@ -403,7 +347,7 @@ function onGroupCreated(response) {
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
-    loadFiles(templateSpace);	
+    //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 
 	//Project creation within the newly created group

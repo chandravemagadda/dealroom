@@ -271,7 +271,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	//loadTasks(templateProject);
+	loadTasks(templateProject);
 	}
 }
 

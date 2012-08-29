@@ -154,7 +154,7 @@ function onTaskFetch(response) {
 	postTask.dueDate = group.dueDate;
 	postTask.subject = group.subject;
 	postTask.content = group.content;
-	postTask.parent = targetGroupID;
+	postTask.parent = targetProjID;
 	console.log ("Task "+index+" :"+JSON.stringify(postTask));
 	osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);
 	});
@@ -274,7 +274,7 @@ osapi.jive.corev3.documents.get ({
 function loadTasks(source) {
 osapi.jive.corev3.tasks.get({
         fields : '@all',
-	uri : source
+	place : source
     }).execute(onTaskFetch);
 }
 
@@ -307,11 +307,13 @@ function onProjectCreated(response) {
 	mini.createDismissibleMessage("Error creating new social project: " + response.error.message);
 	}
 	else {
+	targetProjID = response.resources.self.ref;
+	console.log("target project ID is:" +targetProjID);
 	//console.log("Project: "+JSON.stringify(response));
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProjectURI);
+	loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
 	}
 }

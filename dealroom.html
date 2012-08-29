@@ -57,6 +57,11 @@ function onContentCreated (response) {
         mini.createDismissibleMessage("Unable to create discussions: " + response.error.message);
         return;
     }
+	else
+	{
+	    var tasks = response.list;
+	console.log ("TASKS: "+JSON.stringify(tasks));
+	}
 }
 
 function onDiscFetch(response) {
@@ -157,6 +162,7 @@ function onTaskFetch(response) {
 	postTask.parent = targetProjID;
 	console.log ("Task "+index+" :"+JSON.stringify(postTask));
 	osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);
+	
 	});
     console.log ("Final Tasks: "+JSON.stringify(tasks));
 }
@@ -272,6 +278,7 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
+osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);
 osapi.jive.corev3.tasks.get({
         fields : '@all',
 	place : source
@@ -297,7 +304,7 @@ osapi.jive.corev3.polls.get({
 //Loading Check Points
 function loadCheckPoints(source) {
 console.log ("Check Points:lllllllllllllllllllllllllllll ");
-osapi.jive.corev3.places.Project.getCheckPoints(targetProjID, 1, 2, "@all").execute(onCheckPointFetch);
+osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 // Defines what needs to be done once Project is created
@@ -313,8 +320,8 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	//loadTasks(templateProject);
-	loadCheckPoints(templateProject);
+	loadTasks(templateProject);
+	//loadCheckPoints(templateProject);
 	}
 }
 

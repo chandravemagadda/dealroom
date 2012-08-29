@@ -220,6 +220,39 @@ function onPollFetch(response) {
     //console.log ("Polls: "+JSON.stringify(polls));
 }
 
+//Fetching Check Points
+function onCheckPointFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch checkpoints: " + response.error.message);
+        return;
+    }
+    var checkpoints = response.list;
+	var postCheckpoint;
+	
+	$.each(checkpoints, function(index, group) {
+	postCheckpoint = {
+	type : "",
+	tags : [],
+	subject : "",
+	content : {
+		text : "",
+		type : ""
+	},
+	parent : ""
+	}
+	
+	postCheckpoint.type = group.type;
+	postCheckpoint.tags = group.tags;
+	postCheckpoint.subject = group.subject;
+	postCheckpoint.content = group.content;
+	postCheckpoint.options = group.options;
+	postCheckpoint.parent = targetGroupID;
+	console.log ("CheckPoint "+index+" :"+JSON.stringify(postCheckpoint));
+	osapi.jive.corev3.places.CheckPoint.setCheckpoints(postCheckpoint).execute(onContentCreated);
+	});
+    //console.log ("Check Points: "+JSON.stringify(checkpoints));
+}
+
 //Loading Discussions
 function loadDiscussions(source) {
 osapi.jive.corev3.discussions.get ({
@@ -238,9 +271,9 @@ osapi.jive.corev3.documents.get ({
 
 //Loading Tasks
 function loadTasks(source) {
-osapi.jive.corev3.places.Project.getTasks({
-        fields : '@all'//,
-	//place : source
+osapi.jive.corev3.tasks.get({
+        fields : '@all',
+	place : source
     }).execute(onTaskFetch);
 }
 
@@ -260,6 +293,14 @@ osapi.jive.corev3.polls.get({
     }).execute(onPollFetch);
 }
 
+//Loading Check Points
+function loadCheckPoints(source) {
+osapi.jive.corev3.places.CheckPoint.getCheckpoints({
+        fields : '@all',
+	place : source
+    }).execute(onCheckPointFetch);
+}
+
 // Defines what needs to be done once Project is created
 
 function onProjectCreated(response) {
@@ -271,7 +312,8 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProject);
+	//loadTasks(templateProject);
+	loadCheckPoints(templateProject);
 	}
 }
 

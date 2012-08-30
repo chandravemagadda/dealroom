@@ -294,6 +294,7 @@ function onAttachmentFetch(response) {
 	$.each(attachments, function(index, group) {
 	postAttachment = {
 	id : "",
+	attachmentID : "",
 	type : "",
 	doUpload : "",
 	size : "",
@@ -302,6 +303,7 @@ function onAttachmentFetch(response) {
 	}
 	
 	postAttachment.id = group.id;
+	postAttachment.attachmentID = group.attachmentID;
 	postAttachment.type = group.type;
 	postAttachment.doUpload = group.doUpload;
 	postAttachment.size = group.size;
@@ -369,6 +371,7 @@ osapi.jive.corev3.blogs.get({
 //Loading Attachments
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
+        attachmentID : "1096",
         fields : '@all',
 	uri : source
     }).execute(onAttachmentFetch);

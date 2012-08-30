@@ -265,11 +265,13 @@ function onBlogFetch(response) {
 	
 	$.each(blogs, function(index, group) {
 	postBlog = {
+	type : "",
 	name : "",
 	displayName : "",
 	parent : ""
 	}
 	
+	postBlog.type = group.type;
 	postBlog.name = group.name;
 	postBlog.displayName = group.displayName;
 	postBlog.question = group.question;

@@ -295,11 +295,16 @@ function onAttachmentFetch(response) {
 	postAttachment = {
 	type : "",
 	doUpload : "",
-	contentType : "",
+	contentType : "",	
+	content : {
+		text : "",
+		type : ""
+	},
 	url : ""
 	}
 	
 	postAttachment.type = group.type;
+	postAttachment.content = group.content;
 	postAttachment.doUpload = group.doUpload;
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;

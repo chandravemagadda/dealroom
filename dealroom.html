@@ -281,6 +281,36 @@ function onBlogFetch(response) {
 	});
     //console.log ("Blogs: "+JSON.stringify(blogs));
 }
+
+//Fetching Blogs
+function onAttachmentFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
+        return;
+    }
+    var attachments = response.list;
+	var postAttachment;
+	
+	$.each(attachments, function(index, group) {
+	postAttachment = {
+	type : "",
+	doUpload : "",
+	size : "",
+	contentType : "",
+	url : ""
+	}
+	
+	postAttachment.type = group.type;
+	postAttachment.doUpload = group.doUpload;
+	postAttachment.size = group.size;
+	postAttachment.contentType = group.contentType;
+	postAttachment.url = group.contentType;
+	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
+	osapi.jive.corev3.attachments.create(postAttachment).execute(onContentCreated);
+	});
+    //console.log ("Attachments: "+JSON.stringify(attachments));
+}
+
 //Loading Discussions
 function loadDiscussions(source) {
 osapi.jive.corev3.discussions.get ({
@@ -332,6 +362,14 @@ osapi.jive.corev3.blogs.get({
         fields : '@all'//,
 	//place : source
     }).execute(onBlogFetch);
+}
+
+//Loading Attachments
+function loadAttachments(source) {
+osapi.jive.corev3.attachments.get({
+        fields : '@all',
+	uri : source
+    }).execute(onAttachmentFetch);
 }
 
 // Defines what needs to be done once Project is created

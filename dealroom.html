@@ -357,17 +357,17 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 //Loading Blogs
-function loadBlogs(source) {
+function loadBlogs() {
 osapi.jive.corev3.blogs.get({
-        fields : '@all',
-	place : source
+        fields : '@all'//,
+	//place : source
     }).execute(onBlogFetch);
 }
 
 //Loading Attachments
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
-        fields : '@name',
+        fields : 'name',
 	uri : source
     }).execute(onAttachmentFetch);
 }
@@ -414,8 +414,8 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
-	loadBlogs(templateSpace);
-	//loadAttachments(templateSpace);
+	loadBlogs();
+	loadAttachments(templateSpace);
 
 	//Project creation within the newly created group
 	

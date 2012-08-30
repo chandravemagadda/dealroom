@@ -290,7 +290,15 @@ function onAttachmentFetch(response) {
     }
     var attachments = response.list;
 	var postAttachment;
-	
+	    group = {
+        displayName : "",
+        description : "",
+        followerCount : 0,
+        groupType : "",
+        memberCount : 0,
+        name : "",
+        type : "group"
+    };
 	$.each(attachments, function(index, group) {
 	postAttachment = {
 	type : "",

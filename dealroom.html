@@ -280,7 +280,7 @@ osapi.jive.corev3.tasks.get({
 
 //Loading Files
 function loadFiles(source) {
-osapi.jive.corev3.streamEntries.get({
+ osapi.jive.corev3.messages.get({
         fields : '@all',
 	uri : source
     }).execute(onFileFetch);

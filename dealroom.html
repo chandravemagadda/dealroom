@@ -254,6 +254,31 @@ console.log ("::::::::::::inside onCheckPointFetch:::::::::: ");
     //console.log ("Check Points: "+JSON.stringify(checkpoints));
 }
 
+//Fetching Blogs
+function onBlogFetch(response) {
+    if (response.error) {
+        mini.createDismissibleMessage("Unable to fetch blogs: " + response.error.message);
+        return;
+    }
+    var blogs = response.list;
+	var postBlog;
+	
+	$.each(blogs, function(index, group) {
+	postBlog = {
+	name : "",
+	displayName : "",
+	parent : ""
+	}
+	
+	postBlog.name = group.name;
+	postBlog.displayName = group.displayName;
+	postBlog.question = group.question;
+	postBlog.parent = targetGroupID;
+	console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
+	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
+	});
+    //console.log ("Blogs: "+JSON.stringify(blogs));
+}
 //Loading Discussions
 function loadDiscussions(source) {
 osapi.jive.corev3.discussions.get ({
@@ -299,6 +324,14 @@ function loadCheckPoints(source) {
 osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
+//Loading Blogs
+function loadBlogs() {
+osapi.jive.corev3.blogs.get({
+        fields : '@all'//,
+	//place : source
+    }).execute(onBlogFetch);
+}
+
 // Defines what needs to be done once Project is created
 
 function onProjectCreated(response) {
@@ -341,6 +374,7 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
+	loadBlogs();
 
 	//Project creation within the newly created group
 	

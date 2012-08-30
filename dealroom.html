@@ -293,22 +293,16 @@ function onAttachmentFetch(response) {
 	
 	$.each(attachments, function(index, group) {
 	postAttachment = {
-	id : "",
-	attachmentID : "",
 	type : "",
 	doUpload : "",
-	size : "",
 	contentType : "",
 	url : ""
 	}
 	
-	postAttachment.id = group.id;
-	postAttachment.attachmentID = group.attachmentID;
 	postAttachment.type = group.type;
 	postAttachment.doUpload = group.doUpload;
-	postAttachment.size = group.size;
 	postAttachment.contentType = group.contentType;
-	postAttachment.url = group.contentType;
+	postAttachment.url = group.url;
 	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.attachments.create(postAttachment).execute(onContentCreated);
 	});
@@ -369,11 +363,10 @@ osapi.jive.corev3.blogs.get({
 }
 
 //Loading Attachments
-function loadAttachments(source) {
-osapi.jive.corev3.attachments.get({
-        attachmentID : "1096",
-        fields : '@all',
-	uri : source
+function loadAttachments() {
+oosapi.jive.corev3.contents.Document.getAttachments({
+        fields : '@all'//,
+	//uri : source
     }).execute(onAttachmentFetch);
 }
 
@@ -420,7 +413,7 @@ function onGroupCreated(response) {
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 	//loadBlogs();
-	loadAttachments(templateSpace);
+	loadAttachments();
 
 	//Project creation within the newly created group
 	

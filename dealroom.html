@@ -296,6 +296,7 @@ function onAttachmentFetch(response) {
 	type : "",
 	doUpload : "",
 	contentType : "",	
+	subject : "",
 	content : {
 		text : "",
 		type : ""
@@ -305,7 +306,7 @@ function onAttachmentFetch(response) {
 	
 	postAttachment.type = group.type;
 	postAttachment.content = group.content;
-	postAttachment.doUpload = group.doUpload;
+	postAttachment.subject = group.subject;
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
 	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));

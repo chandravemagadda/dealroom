@@ -364,7 +364,7 @@ osapi.jive.corev3.blogs.get({
 
 //Loading Attachments
 function loadAttachments() {
-oosapi.jive.corev3.contents.Document.getAttachments({
+osapi.jive.corev3.contents.Document.getAttachments({
         fields : '@all'//,
 	//uri : source
     }).execute(onAttachmentFetch);

@@ -308,7 +308,7 @@ function onAttachmentFetch(response) {
 	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.attachments.create(postAttachment).execute(onContentCreated);
 	});
-    //console.log ("Attachments: "+JSON.stringify(attachments));
+    console.log ("Attachments: "+JSON.stringify(attachments));
 }
 
 //Loading Discussions
@@ -367,7 +367,7 @@ osapi.jive.corev3.blogs.get({
 //Loading Attachments
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
-        attachmentID :"1093", 
+        attachmentID :"1095", 
         fields : '@all',
 	uri : source
     }).execute(onAttachmentFetch);

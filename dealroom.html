@@ -310,7 +310,7 @@ function onAttachmentFetch(response) {
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
 	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
-	osapi.jive.corev3.documents.create(postAttachment).execute(onContentCreated);
+	osapi.jive.corev3.documents.getAttachments(postAttachment).execute(onContentCreated);
 	});
     console.log ("Attachments: "+JSON.stringify(attachments));
 }

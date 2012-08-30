@@ -367,7 +367,8 @@ osapi.jive.corev3.blogs.get({
 //Loading Attachments
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
-        id: "1096",  
+        attachmentID : "1060", 
+        id: "1060",  
         fields : 'name',
 	uri : source
     }).execute(onAttachmentFetch);

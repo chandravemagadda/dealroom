@@ -367,6 +367,7 @@ osapi.jive.corev3.blogs.get({
 //Loading Attachments
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
+        id: source,  
         fields : 'name',
 	uri : source
     }).execute(onAttachmentFetch);

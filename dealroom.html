@@ -175,13 +175,13 @@ function onFileFetch(response) {
 	postFile = {
 	
 	type : "",
-	parent : ""
+	filename : ""
 	}
 	
 	postFile.type = group.type;
-	postFile.parent = group.parent;
+	postFile.filename = group.filename;
 	console.log ("File "+index+" :"+JSON.stringify(postFile));
-	osapi.jive.corev3.streamEntries.create(postFile).execute(onContentCreated);
+	osapi.jive.corev3.statics.create(postFile).execute(onContentCreated);
 	});
     console.log ("Final Files: "+JSON.stringify(files));
 }
@@ -280,7 +280,7 @@ osapi.jive.corev3.tasks.get({
 
 //Loading Files
 function loadFiles(source) {
- osapi.jive.corev3.messages.get({
+osapi.jive.corev3.statics.get({
         fields : '@all',
 	uri : source
     }).execute(onFileFetch);
@@ -339,7 +339,7 @@ function onGroupCreated(response) {
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
-    loadFiles(templateSpace);	
+    //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 
 	//Project creation within the newly created group

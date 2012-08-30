@@ -304,7 +304,7 @@ function onAttachmentFetch(response) {
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
 	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
-	osapi.jive.corev3.attachments.create(postAttachment).execute(onContentCreated);
+	osapi.jive.corev3.documents.create(postAttachment).execute(onContentCreated);
 	});
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
@@ -363,10 +363,10 @@ osapi.jive.corev3.blogs.get({
 }
 
 //Loading Attachments
-function loadAttachments() {
-osapi.jive.corev3.contents.Document.getAttachments({
-        fields : '@all'//,
-	//uri : source
+function loadAttachments(source) {
+osapi.jive.corev3.documents.get({
+        fields : '@all',
+	uri : source
     }).execute(onAttachmentFetch);
 }
 

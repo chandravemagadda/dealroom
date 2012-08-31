@@ -40,6 +40,8 @@ var mini;
 // IDs
 var targetGroupID = "";
 var targetProjID = "";
+var pStartDateAbs="";
+var pDueDateAbs ="";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
@@ -557,6 +559,15 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
+if(pStartDateAbs<pDueDateAbs)
+{
+alert("start date is less than end date");
+}
+else
+{
+alert("start date is greater than end date");
+}
+
     group = {
         displayName : "",
         description : "",
@@ -595,12 +606,12 @@ gadgets.util.registerOnLoadHandler(init);
 	<tr>
 	 <td >
 		<table class="j-table">
-		<tr> <td colspan="2">
+		<tr> <td>
 			
 		<label>Deal Room Name:</label></td>
-		</tr></table>
+		
 
-	</td>
+	
 	<td>
 <input id="group-name" class="group-input" type="text"/></td>
 </tr>
@@ -615,7 +626,7 @@ gadgets.util.registerOnLoadHandler(init);
 <td>		            <input id="project-due-date" type="text"/></td>
 </tr>
 <tr><td colspan="2" align="center">	
-<input type="button" class="group-create-button" align="center" size="70px" value="Create Deal Room"> 
+<input type="button" id="group-create-button" align="center" size="50px" value="Create Deal Room"> 
 		            		        </td>
 </tr>
 				

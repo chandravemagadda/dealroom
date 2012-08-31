@@ -288,7 +288,7 @@ function onAttachmentFetch(response) {
         mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
         return;
     }
-    var attachments = response.attachments.url;
+    var attachments = response.list;
 	console.log ("attachments: "+JSON.stringify(attachments));
 	var postAttachment;
 	

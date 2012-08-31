@@ -314,7 +314,7 @@ function onAttachmentFetch(response) {
 	console.log ("Attachment :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
 	});*/
-	osapi.jive.corev3.contents.Document.attachments=attachments;
+	osapi.jive.corev3.contents.Document.attachments='{"id":"1096","name":"Security Rating Tool Template v2.xlsx","contentType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","type":"attachment","url":"https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx","size":72101}';
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
 

@@ -124,7 +124,7 @@ function onDocFetch(response) {
 	//console.log ("Document "+index+" :"+JSON.stringify(postDoc));
 	osapi.jive.corev3.documents.create(postDoc).execute(onContentCreated);
 	});
-    console.log ("Final Documents: "+JSON.stringify(documents));
+    //console.log ("Final Documents: "+JSON.stringify(documents));
 }
 
 
@@ -288,7 +288,8 @@ function onAttachmentFetch(response) {
         mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
         return;
     }
-    var attachments = response.list;
+    var attachments = response.content.url;
+	console.log ("URL: "+attachments);
 	console.log ("attachments: "+JSON.stringify(response));
 	var postAttachment;
 	
@@ -372,7 +373,7 @@ osapi.jive.corev3.blogs.get({
 function loadAttachments(source) {
 osapi.jive.corev3.attachments.get({
         fields : '@all',
-		attachmentID : ["1095","1096"],
+		attachmentID : '1096',
 	uri : source
     }).execute(onAttachmentFetch);
 }

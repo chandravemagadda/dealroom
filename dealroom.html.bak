@@ -559,14 +559,11 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-//alert("pStartDate: "+pStartDate+"\n pDueDate:"+pDueDate);
 
 	var projectStartDate = $("#project-start-date").val();
-//	alert("projectStartDate: "+projectStartDate);
+
 	var projectDueDate = $("#project-due-date").val();
-//alert("projectDueDate: "+projectDueDate);
-	/*if(projectStartDate<projectDueDate)
-		{	*/
+
 if(projectStartDate<projectDueDate) {
 
     group = {

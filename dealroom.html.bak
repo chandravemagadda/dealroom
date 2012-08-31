@@ -40,8 +40,6 @@ var mini;
 // IDs
 var targetGroupID = "";
 var targetProjID = "";
-//var pStartDate="";
-//var pDueDate ="";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
@@ -524,11 +522,11 @@ function onGroupCreated(response) {
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	
-	var pStartDateEntry = $("#project-start-date").val(); //Project Start date
+	var pStartDateEntry = $("#project-start-date").val(); //Project Start
 	var pStartDateAbs = new Date(pStartDateEntry);
 	var pStartDate = ISODateString(pStartDateAbs);
 	
-	var pDueDateEntry = $("#project-due-date").val(); //Project due date
+	var pDueDateEntry = $("#project-due-date").val(); //Project Start
 	var pDueDateAbs = new Date(pDueDateEntry);
 	var pDueDate = ISODateString(pDueDateAbs);
 	
@@ -559,18 +557,6 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-//alert("pStartDate: "+pStartDate+"\n pDueDate:"+pDueDate);
-
-	var projectStartDate = $("#project-start-date").val();
-//	alert("projectStartDate: "+projectStartDate);
-	var projectDueDate = $("#project-due-date").val();
-//alert("projectDueDate: "+projectDueDate);
-	/*if(projectStartDate<projectDueDate)
-		{	*/
-if(projectStartDate<projectDueDate) {
-alert("startdate is less than due date");
-}
- 
     group = {
         displayName : "",
         description : "",
@@ -590,12 +576,8 @@ alert("startdate is less than due date");
     if (adding) {
         osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
     }
-/*}
-else 
-{
-	mini.createDismissibleMessage("Project due date should not be less than project start date");
-}*/
 }
+
 // Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
 </script>
@@ -606,19 +588,18 @@ gadgets.util.registerOnLoadHandler(init);
 <div id="stylized" class="myform">
 <table>
 <tr>
-<div id="group-div" class="top-level-div">
  <td colspan="2">
+
+	<div id="group-div" class="top-level-div">
 	<legend>AI Deal Room Creator</legend><td>
 </tr>
 	<tr>
-	 <td >
+	 <td>
 		<table class="j-table">
-		<tr> <td>
 			
-		<label>Deal Room Name:</label></td>
-		
+		<label>Deal Room Name:</label>
 
-	
+	</td>
 	<td>
 <input id="group-name" class="group-input" type="text"/></td>
 </tr>
@@ -632,12 +613,11 @@ gadgets.util.registerOnLoadHandler(init);
 
 <td>		            <input id="project-due-date" type="text"/></td>
 </tr>
-<tr><td colspan="2" align="center">	
-<input type="button" id="group-create-button" align="center" size="50px" value="Create Deal Room"> 
-		            		        </td>
+<tr><td colspan="2" align="center">		
+		            <button id="group-create-button" align="center" size="100px">Create Deal Room</button>		        </td>
 </tr>
 				
-		
+		</table>
 		
 		         
 		        

@@ -288,7 +288,8 @@ function onAttachmentFetch(response) {
         mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
         return;
     }
-    var attachments = response.list;
+    var attachments = response.resources.attachments;
+	console.log ("attachments: "+JSON.stringify(attachments));
 	var postAttachment;
 	
 	$.each(attachments, function(index, group) {

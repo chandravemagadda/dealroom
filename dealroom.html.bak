@@ -559,14 +559,14 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-if(pStartDateAbs<pDueDateAbs)
-{
-alert("start date is less than end date");
-}
-else
-{
-alert("start date is greater than end date");
-}
+	if(pStartDateAbs<pDueDateAbs)
+		{
+		alert("start date is less than end date");
+		}
+		else
+		{
+		alert("start date is greater than end date");
+		}
 
     group = {
         displayName : "",

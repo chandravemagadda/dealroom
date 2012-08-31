@@ -604,9 +604,10 @@ gadgets.util.registerOnLoadHandler(init);
 <div id="stylized" class="myform">
 <table>
 <tr>
-<div id="group-div" class="top-level-div">
+
  <td colspan="2">
-	<legend>AI Deal Room Creator</legend><td>
+ <div id="group-div" class="top-level-div">
+	<legend>AI Deal Room Creator</legend><td></div>
 </tr>
 	<tr>
 	 <td >

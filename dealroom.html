@@ -567,7 +567,7 @@ function onGroupSave() {
 //alert("projectDueDate: "+projectDueDate);
 	/*if(projectStartDate<projectDueDate)
 		{	*/
-if(projectStartDate<projectDueDate) {
+//if(projectStartDate<projectDueDate) {
 
     group = {
         displayName : "",
@@ -588,11 +588,11 @@ if(projectStartDate<projectDueDate) {
     if (adding) {
         osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
     }
-}
-else 
-{
-	mini.createDismissibleMessage("Project due date should not be less than project start date");
-}
+//}
+//else 
+//{
+//	mini.createDismissibleMessage("Project due date should not be less than project start date");
+//}
 }
 // Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);

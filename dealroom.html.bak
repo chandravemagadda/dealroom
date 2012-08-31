@@ -598,8 +598,9 @@ gadgets.util.registerOnLoadHandler(init);
 </head>
 
 <body>
-<div id="stylized" >
-<table class="myform">
+
+<table>
+<div id="stylized" class="myform">
 <tr>
 
  <td colspan="2">

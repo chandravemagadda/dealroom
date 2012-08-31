@@ -120,7 +120,7 @@ function onDocFetch(response) {
 	postDoc.subject = group.subject;
 	postDoc.content = group.content;
 	postDoc.question = group.question;
-	postDoc.parent = targetGroupID;
+	postDoc.parent = targetProjID;
 	//console.log ("Document "+index+" :"+JSON.stringify(postDoc));
 	osapi.jive.corev3.documents.create(postDoc).execute(onContentCreated);
 	});
@@ -417,8 +417,8 @@ function onGroupCreated(response) {
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = "Group successfully created. <br /> Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the group";
 	// Add GROUP Content-Copying here!
-	loadDiscussions(templateSpace);
-    loadDocuments(templateSpace);
+	//loadDiscussions(templateSpace);
+    //loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	//loadPolls(templateSpace);
 	//loadBlogs();

@@ -5,8 +5,17 @@
 <link type="text/css" href="css/custom-theme/jive-elements.css" rel="stylesheet"/>
 <link type="text/css" href="css/custom-theme/jive-icons.css" rel="stylesheet"/>
 <link type="text/css" href="css/security-groups.css" rel="stylesheet"/>
-
-<script type="text/javascript">
+<link type="text/css" href="style.css" rel="stylesheet"/>
+		
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  
+ <script type="text/javascript">
+  $(document).ready(function() {
+    $("#project-start-date").datepicker();
+	$("#project-due-date").datepicker();
+  });
 
 // Templates' IDs for the current AI instance
 var templateSpace = "/places/1060"; //actually, a SPACE

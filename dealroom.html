@@ -99,13 +99,13 @@ function onDocFetch(response) {
         return;
     }
     var documents = response.list;
+	//console.log ("Documents: "+JSON.stringify(documents));
 	var postDoc;
 	
 	$.each(documents, function(index, group) {
 	postDoc = {
 	type : "",
 	tags : [],
-	attachments : [ ],
 	subject : "",
 	content : {
 		text : "",
@@ -117,17 +117,10 @@ function onDocFetch(response) {
 	
 	postDoc.type = group.type;
 	postDoc.tags = group.tags;
-	postDoc.attachments = group.attachments;
 	postDoc.subject = group.subject;
 	postDoc.content = group.content;
 	postDoc.question = group.question;
 	postDoc.parent = targetGroupID;
-	postDoc.attachments.name="";
-	postDoc.attachments.doUpload=true;
-	postDoc.attachments.type="attachment";
-	postDoc.attachments.contentType = "img/png";
-	postDoc.attachments.url= "https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx";
-	postDoc.attachments.id="1096";
 	//console.log ("Document "+index+" :"+JSON.stringify(postDoc));
 	osapi.jive.corev3.documents.create(postDoc).execute(onContentCreated);
 	});
@@ -295,10 +288,8 @@ function onAttachmentFetch(response) {
         mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
         return;
     }
-    var attachments = response.content;
-	console.log ("URL: "+attachments);
-	console.log ("attachments: "+JSON.stringify(response));
-	/*var postAttachment;
+    var attachments = response.list;
+	var postAttachment;
 	
 	$.each(attachments, function(index, group) {
 	postAttachment = {
@@ -308,23 +299,19 @@ function onAttachmentFetch(response) {
 	subject : "",
 	content : {
 		text : "",
-		type : "attachment"
+		type : ""
 	},
 	url : ""
 	}
 	
-	postAttachment.type = "attachment";
+	postAttachment.type = group.type;
 	postAttachment.content = group.content;
 	postAttachment.subject = group.subject;
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
-	console.log ("Attachment :"+JSON.stringify(postAttachment));
+	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
-	});*/
-	osapi.jive.corev3.contents.Document.attachments={"attachments": [ {
-    "doUpload" : true,
-    "url" : "https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx"
-    } ] };
+	});
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
 
@@ -405,6 +392,8 @@ function onProjectCreated(response) {
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
 	//loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
+	loadDiscussions(templateProject);
+    loadDocuments(templateProject);
 	}
 }
 
@@ -431,9 +420,9 @@ function onGroupCreated(response) {
 	loadDiscussions(templateSpace);
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
-	loadPolls(templateSpace);
+	//loadPolls(templateSpace);
 	//loadBlogs();
-	loadAttachments(templateSpace);
+	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	
 	var pStartDateEntry = $("#project-start-date").val(); //Project Start

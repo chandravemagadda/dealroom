@@ -598,7 +598,7 @@ gadgets.util.registerOnLoadHandler(init);
 </head>
 
 <body>
-<div id="stylized" class="myform">
+
 <table>
 <tr>
 
@@ -611,7 +611,7 @@ gadgets.util.registerOnLoadHandler(init);
 		<table class="j-table">
 		<tr> <td>
 			
-		Deal Room Name:</td>
+		<label>Deal Room Name:</label></td>
 		
 
 	

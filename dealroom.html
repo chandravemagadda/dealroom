@@ -99,14 +99,13 @@ function onDocFetch(response) {
         return;
     }
     var documents = response.list;
-	var attachments = documents.attachments;
-	console.log ("Documents: "+JSON.stringify(attachments));
 	var postDoc;
 	
 	$.each(documents, function(index, group) {
 	postDoc = {
 	type : "",
 	tags : [],
+	attachments : [ ],
 	subject : "",
 	content : {
 		text : "",
@@ -118,6 +117,7 @@ function onDocFetch(response) {
 	
 	postDoc.type = group.type;
 	postDoc.tags = group.tags;
+	postDoc.attachments = group.attachments;
 	postDoc.subject = group.subject;
 	postDoc.content = group.content;
 	postDoc.question = group.question;

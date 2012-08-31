@@ -16,7 +16,7 @@ legend { padding: 5px 5px; background-color: #4F709F; color: white; -webkit-bord
 
 /* ----------- stylized ----------- */
 #stylized{
-/*border:solid 2px #b7ddf2;*/
+--border:solid 2px #b7ddf2;
 background:#ebf4fb;
 }
 #stylized h1 {

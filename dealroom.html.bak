@@ -565,7 +565,7 @@ function onGroupSave() {
 	alert("projectStartDate: "+projectStartDate);
 	var projectDueDate = $("#project-due-date").val();
 alert("projectDueDate: "+projectDueDate);
-	if(pStartDate<pDueDate)
+	if(projectStartDate<projectDueDate)
 		{	
 
     group = {

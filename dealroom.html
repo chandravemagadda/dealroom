@@ -291,7 +291,7 @@ function onAttachmentFetch(response) {
     var attachments = response.content;
 	console.log ("URL: "+attachments);
 	console.log ("attachments: "+JSON.stringify(response));
-	var postAttachment;
+	/*var postAttachment;
 	
 	$.each(attachments, function(index, group) {
 	postAttachment = {
@@ -313,7 +313,8 @@ function onAttachmentFetch(response) {
 	postAttachment.url = group.url;
 	console.log ("Attachment :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
-	});
+	});*/
+	osapi.jive.corev3.contents.Document.attachments=attachments;
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
 

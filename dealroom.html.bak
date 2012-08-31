@@ -589,8 +589,7 @@ gadgets.util.registerOnLoadHandler(init);
 	<div id="group-div" class="top-level-div">
 	<legend>AI Deal Room Creator</legend>
 		<table class="j-table">
-		
-	
+		<br>	
 		<label>Deal Room Name
 
 </label>

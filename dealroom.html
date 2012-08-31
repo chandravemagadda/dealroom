@@ -524,11 +524,11 @@ function onGroupCreated(response) {
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	
-	var pStartDateEntry = $("#project-start-date").val(); //Project Start
+	var pStartDateEntry = $("#project-start-date").val(); //Project Start date
 	var pStartDateAbs = new Date(pStartDateEntry);
 	var pStartDate = ISODateString(pStartDateAbs);
 	
-	var pDueDateEntry = $("#project-due-date").val(); //Project Start
+	var pDueDateEntry = $("#project-due-date").val(); //Project due date
 	var pDueDateAbs = new Date(pDueDateEntry);
 	var pDueDate = ISODateString(pDueDateAbs);
 	
@@ -559,7 +559,13 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-alert("pStartDate: "+pStartDate+"\n pDueDate:"+pDueDate);
+//alert("pStartDate: "+pStartDate+"\n pDueDate:"+pDueDate);
+var pStartDateEntry = $("#project-start-date").val(); //Project Start date
+alert("pStartDateEntry: "+pStartDateEntry);
+	var pStartDateAbs = new Date(pStartDateEntry);
+	alert("pStartDateAbs: "+pStartDateAbs);
+	var pStartDate = ISODateString(pStartDateAbs);
+	alert("pStartDate: "+pStartDate);
 	if(pStartDate<pDueDate)
 		{	
 

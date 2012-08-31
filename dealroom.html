@@ -295,13 +295,13 @@ function onAttachmentFetch(response) {
 	
 	$.each(attachments, function(index, group) {
 	postAttachment = {
-	type : "attachment",
+	type : "",
 	doUpload : "",
 	contentType : "",	
 	subject : "",
 	content : {
 		text : "",
-		type : ""
+		type : "attachment"
 	},
 	url : ""
 	}

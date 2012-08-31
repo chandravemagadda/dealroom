@@ -288,12 +288,12 @@ function onAttachmentFetch(response) {
         mini.createDismissibleMessage("Unable to fetch attachments: " + response.error.message);
         return;
     }
-    var attachments = response.content.url;
+    var attachments = response.content;
 	console.log ("URL: "+attachments);
 	console.log ("attachments: "+JSON.stringify(response));
 	var postAttachment;
 	
-	
+	$.each(attachments, function(index, group) {
 	postAttachment = {
 	type : "attachment",
 	doUpload : "",
@@ -312,7 +312,8 @@ function onAttachmentFetch(response) {
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
 	console.log ("Attachment :"+JSON.stringify(postAttachment));
-	osapi.jive.corev3.contents.create(JSON.stringify(postAttachment)).execute(onContentCreated);
+	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
+	});
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
 

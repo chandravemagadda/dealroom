@@ -289,7 +289,7 @@ function onAttachmentFetch(response) {
         return;
     }
     var attachments = response.list;
-	console.log ("attachments: "+JSON.stringify(attachments));
+	console.log ("attachments: "+JSON.stringify(response));
 	var postAttachment;
 	
 	$.each(attachments, function(index, group) {

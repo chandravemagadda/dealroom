@@ -120,7 +120,7 @@ function onDocFetch(response) {
 	postDoc.subject = group.subject;
 	postDoc.content = group.content;
 	postDoc.question = group.question;
-	postDoc.parent = targetProjID;
+	postDoc.parent = targetGroupID;
 	//console.log ("Document "+index+" :"+JSON.stringify(postDoc));
 	osapi.jive.corev3.documents.create(postDoc).execute(onContentCreated);
 	});

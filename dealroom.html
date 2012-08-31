@@ -99,7 +99,8 @@ function onDocFetch(response) {
         return;
     }
     var documents = response.list;
-	//console.log ("Documents: "+JSON.stringify(documents));
+	var attachments = response.attachments;
+	console.log ("Documents: "+JSON.stringify(attachments));
 	var postDoc;
 	
 	$.each(documents, function(index, group) {
@@ -124,7 +125,7 @@ function onDocFetch(response) {
 	//console.log ("Document "+index+" :"+JSON.stringify(postDoc));
 	osapi.jive.corev3.documents.create(postDoc).execute(onContentCreated);
 	});
-    //console.log ("Final Documents: "+JSON.stringify(documents));
+    console.log ("Final Documents: "+JSON.stringify(documents));
 }
 
 
@@ -314,13 +315,10 @@ function onAttachmentFetch(response) {
 	console.log ("Attachment :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
 	});*/
-	osapi.jive.corev3.contents.create({
+	osapi.jive.corev3.contents.Document.attachments={"attachments": [ {
     "doUpload" : true,
-	"type" : "attachment",
     "url" : "https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx"
- }).execute(onContentCreated);
-	
-	//osapi.jive.corev3.contents.Document.attachments=[ {"id":"1096","name":"Security Rating Tool Template v2.xlsx","contentType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","type":"attachment","url":"https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx","size":"72101"} ];
+    } ] };
     console.log ("Attachments: "+JSON.stringify(attachments));
 }
 

@@ -317,6 +317,7 @@ function onAttachmentFetch(response) {
 	osapi.jive.corev3.contents.create({
   "attachments": [ {
     "doUpload" : true,
+	"type" : "attachment",
     "url" : "https://accenture.jiveon.com/servlet/JiveServlet/download/1090-1-1096/Security+Rating+Tool+Template+v2.xlsx"
     } ]
  }).execute(onContentCreated);

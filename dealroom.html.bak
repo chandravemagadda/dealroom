@@ -585,14 +585,13 @@ gadgets.util.registerOnLoadHandler(init);
 </head>
 
 <body>
-
-<div id="stylized" class="myform" style="max-height: 250px; overflow:auto">
+<div id="stylized" class="myform">
 	<div id="group-div" class="top-level-div">
 	<legend>AI Deal Room Creator</legend>
 		<table class="j-table">
 		
 	
-		<label>Deal Room Name<br>
+		<label>Deal Room Name
 
 </label>
 <input id="group-name" class="group-input" type="text"/>
@@ -618,6 +617,5 @@ gadgets.util.registerOnLoadHandler(init);
 	<div id="response-message"></div>
 	
 </div>
-
 </body>
 </html>

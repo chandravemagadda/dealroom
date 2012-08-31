@@ -585,10 +585,11 @@ gadgets.util.registerOnLoadHandler(init);
 </head>
 
 <body>
+<div id="stylized" class="myform">
 <table>
 <tr>
  <td colspan="2">
-<div id="stylized" class="myform">
+
 	<div id="group-div" class="top-level-div">
 	<legend>AI Deal Room Creator</legend><td>
 </tr>
@@ -612,7 +613,8 @@ gadgets.util.registerOnLoadHandler(init);
 
 <td>		            <input id="project-due-date" type="text"/></td>
 </tr>
-<tr><td colspan="2" align="center">					
+<tr><td colspan="2" align="center">		
+<input type="button" id="group-create-button" align="center" size="100px" value="Create Deal Room"> 
 		            <button id="group-create-button" align="center" size="100px">Create Deal Room</button>		        </td>
 </tr>
 				

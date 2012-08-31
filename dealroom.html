@@ -560,13 +560,12 @@ function onGroupCreated(response) {
 
 function onGroupSave() {
 //alert("pStartDate: "+pStartDate+"\n pDueDate:"+pDueDate);
-var pStartDateEntry = $("#project-start-date").val(); //Project Start date
-alert("pStartDateEntry: "+pStartDateEntry);
-	var pStartDateAbs = new Date(pStartDateEntry);
-	alert("pStartDateAbs: "+pStartDateAbs);
-	var pStartDate = ISODateString(pStartDateAbs);
-	alert("pStartDate: "+pStartDate);
-	if(pStartDate<pDueDate)
+
+	var projectStartDate = $("#project-start-date").val();
+	alert("projectStartDate: "+projectStartDate);
+	var projectDueDate = $("#project-due-date").val();
+alert("projectDueDate: "+projectDueDate);
+	if(projectStartDate<projectDueDate)
 		{	
 
     group = {

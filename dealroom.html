@@ -99,7 +99,7 @@ function onDocFetch(response) {
         return;
     }
     var documents = response.list;
-	var attachments = response.resources.attachments;
+	var attachments = documents.attachments;
 	console.log ("Documents: "+JSON.stringify(attachments));
 	var postDoc;
 	

@@ -294,7 +294,7 @@ function onAttachmentFetch(response) {
 	
 	
 	postAttachment = {
-	type : "",
+	type : "attachment",
 	doUpload : "",
 	contentType : "",	
 	subject : "",
@@ -305,7 +305,7 @@ function onAttachmentFetch(response) {
 	url : ""
 	}
 	
-	postAttachment.type = group.type;
+	//postAttachment.type = "attachment";
 	postAttachment.content = group.content;
 	postAttachment.subject = group.subject;
 	postAttachment.contentType = group.contentType;

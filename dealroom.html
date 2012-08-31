@@ -40,8 +40,8 @@ var mini;
 // IDs
 var targetGroupID = "";
 var targetProjID = "";
-var pStartDateAbs="";
-var pDueDateAbs ="";
+var pStartDate="";
+var pDueDate ="";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
@@ -559,7 +559,7 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-	if(pStartDateAbs<pDueDateAbs)
+	if(pStartDate<pDueDate)
 		{	
 
     group = {
@@ -584,7 +584,7 @@ function onGroupSave() {
 }
 else 
 {
-mini.createDismissibleMessage("Project due date should not be less than project start date");
+	mini.createDismissibleMessage("Project due date should not be less than project start date");
 }
 }
 // Register our on-view-load handler

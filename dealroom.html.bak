@@ -586,13 +586,13 @@ gadgets.util.registerOnLoadHandler(init);
 
 <body>
 
-<div id="stylized" class="myform" style="width: 300px; max-height: 60px; overflow:auto">
+<div id="stylized" class="myform" style="max-height: 250px; overflow:auto">
 	<div id="group-div" class="top-level-div">
 	<legend>AI Deal Room Creator</legend>
 		<table class="j-table">
 		
 	
-		<label>Deal Room Name
+		<label>Deal Room Name<br>
 
 </label>
 <input id="group-name" class="group-input" type="text"/>

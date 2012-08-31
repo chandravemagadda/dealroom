@@ -40,8 +40,8 @@ var mini;
 // IDs
 var targetGroupID = "";
 var targetProjID = "";
-var pStartDate="";
-var pDueDate ="";
+//var pStartDate="";
+//var pDueDate ="";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
@@ -565,8 +565,8 @@ function onGroupSave() {
 //	alert("projectStartDate: "+projectStartDate);
 	var projectDueDate = $("#project-due-date").val();
 //alert("projectDueDate: "+projectDueDate);
-	if(projectStartDate<projectDueDate)
-		{	
+	/*if(projectStartDate<projectDueDate)
+		{	*/
 
     group = {
         displayName : "",
@@ -587,11 +587,11 @@ function onGroupSave() {
     if (adding) {
         osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
     }
-}
+/*}
 else 
 {
 	mini.createDismissibleMessage("Project due date should not be less than project start date");
-}
+}*?
 }
 // Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);

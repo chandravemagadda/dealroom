@@ -628,8 +628,8 @@ gadgets.util.registerOnLoadHandler(init);
 
 <td>		            <input id="project-due-date" type="text"/></td>
 </tr>
-<tr><td colspan="2"><div align="center"> 	
-<input type="button" id="group-create-button" align="center" size="50px" value="Create Deal Room"> </div>
+<tr><td colspan="2" align="center">	
+<input type="button" id="group-create-button" align="center" size="50px" value="Create Deal Room"> 
 		            		        </td>
 </tr>
 				

@@ -19,9 +19,10 @@
 
 // Templates' IDs for the current AI instance
 var templateSpace = "/places/2201"; //actually, a SPACE
+
 var templateSpaceURI = "https://apps-public-cloud-trunk.jivesoftware.com/groups/deal-room-template-group";
+//var templateSpaceURI = "https://accenture.jiveon.com/community/deal-room-template";
 var templateProject = "/places/2294";
-var templateProjectTasks = "/places/2203";
 var templateProjectURI = "https://apps-public-cloud-trunk.jivesoftware.com/groups/deal-room-template-group/projects/rfp-response-template";
 
 // Flag indicating we are in add mode
@@ -41,14 +42,13 @@ var mini;
 // IDs
 var targetGroupID = "";
 var targetProjID = "";
+//var pStartDate="";
+//var pDueDate ="";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
-//console.log("intializing1...........");
-    //osapi.jive.corev3.people.getViewer({}).execute(function(response) {});
-	//console.log("intializing2...........");
+   // osapi.jive.corev3.people.getViewer({}).execute(function(response) {});
     $("#group-create-button").click(onGroupSave);
-	//console.log("intializing...........");
     mini = new gadgets.MiniMessage();
 }
 
@@ -67,7 +67,7 @@ function ISODateString(d){
 
 function onContentCreated (response) {
     if (response.error) {
-        mini.createDismissibleMessage("Unable to create discussions: " + response.error.message);
+        mini.createDismissibleMessage("Unable to create content: " + response.error.message);
         return;
     }
 }
@@ -90,9 +90,10 @@ function onDiscFetch(response) {
 		text : "",
 		type : ""
 	},
-	question : ""//,
-	//parent : ""
+	question : "",
+	parent : ""
 	}
+	
 	postDisc.type = group.type;
 	postDisc.tags = group.tags;
 	postDisc.subject = group.subject;
@@ -102,7 +103,7 @@ function onDiscFetch(response) {
 	//console.log ("Discussion "+index+" :"+JSON.stringify(postDisc));
 	osapi.jive.corev3.discussions.create(postDisc).execute(onContentCreated);
 	});
-    //console.log ("Discussions: "+JSON.stringify(discussions));
+    console.log ("Discussions: "+JSON.stringify(discussions));
 }
 
 
@@ -137,7 +138,7 @@ function onProjDiscFetch(response) {
 	//console.log ("Discussion "+index+" :"+JSON.stringify(postDisc));
 	osapi.jive.corev3.discussions.create(postDisc).execute(onContentCreated);
 	});
-    console.log ("Project Discussions: "+JSON.stringify(discussions));
+    //console.log ("Discussions: "+JSON.stringify(discussions));
 }
 
 //Fetching Documents
@@ -183,7 +184,7 @@ function onProjDocFetch(response) {
         return;
     }
     var documents = response.list;
-	//console.log ("Project Documents: "+JSON.stringify(documents));
+	//console.log ("Documents: "+JSON.stringify(documents));
 	var postDoc;
 	
 	$.each(documents, function(index, group) {
@@ -241,7 +242,7 @@ function onTaskFetch(response) {
 	//console.log ("Task "+index+" :"+JSON.stringify(postTask));
 	osapi.jive.corev3.tasks.create(postTask).execute(onContentCreated);
 	});
-    //console.log ("Final Tasks: "+JSON.stringify(tasks));
+    console.log ("Final Tasks: "+JSON.stringify(tasks));
 }
 
 //Fetching Files
@@ -357,12 +358,12 @@ function onBlogFetch(response) {
 	postBlog.type = group.type;
 	postBlog.name = group.name;
 	postBlog.displayName = group.displayName;
-	postBlog.question = group.question;
+	//postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
 	//console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
 	});
-    //console.log ("Blogs: "+JSON.stringify(blogs));
+    console.log ("Blogs: "+JSON.stringify(blogs));
 }
 
 //Fetching Blogs
@@ -392,10 +393,10 @@ function onAttachmentFetch(response) {
 	postAttachment.subject = group.subject;
 	postAttachment.contentType = group.contentType;
 	postAttachment.url = group.url;
-	//console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
+	console.log ("Attachment "+index+" :"+JSON.stringify(postAttachment));
 	osapi.jive.corev3.contents.create(postAttachment).execute(onContentCreated);
 	});
-    //console.log ("Attachments: "+JSON.stringify(attachments));
+    console.log ("Attachments: "+JSON.stringify(attachments));
 }
 
 //Loading Discussions
@@ -461,10 +462,10 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 //Loading Blogs
-function loadBlogs() {
+function loadBlogs(source) {
 osapi.jive.corev3.blogs.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onBlogFetch);
 }
 
@@ -486,14 +487,13 @@ function onProjectCreated(response) {
 	else {
 	targetProjID = response.resources.self.ref;
 	//console.log("target project ID is:" +targetProjID);
-	//console.log("Project: "+JSON.stringify(response));
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProjectTasks);
+	//loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
-	loadProjDiscussions(templateProjectTasks);
-    loadProjDocuments(templateProjectTasks);
+	loadProjDiscussions(templateProject);
+    //loadProjDocuments(templateProject);
 	}
 }
 
@@ -502,7 +502,6 @@ function onProjectCreated(response) {
 // 2. Create Project
 
 function onGroupCreated(response) {
-//console.log("inside on groupcreated metod............");
 	if (response.error) {
 	mini.createDismissibleMessage("Error creating new social group: " + response.error.message);
 	}
@@ -522,15 +521,15 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
-	//loadBlogs();
+	//loadBlogs(templateSpace);
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	
-	var pStartDateEntry = $("#project-start-date").val(); //Project Start
+	var pStartDateEntry = $("#project-start-date").val(); //Project Start date
 	var pStartDateAbs = new Date(pStartDateEntry);
 	var pStartDate = ISODateString(pStartDateAbs);
 	
-	var pDueDateEntry = $("#project-due-date").val(); //Project Start
+	var pDueDateEntry = $("#project-due-date").val(); //Project due date
 	var pDueDateAbs = new Date(pDueDateEntry);
 	var pDueDate = ISODateString(pDueDateAbs);
 	
@@ -561,7 +560,13 @@ function onGroupCreated(response) {
 }
 
 function onGroupSave() {
-//console.log("creating group............");
+
+	var projectStartDate = $("#project-start-date").val();
+
+	var projectDueDate = $("#project-due-date").val();
+
+if(projectStartDate<projectDueDate) {
+
     group = {
         displayName : "",
         description : "",
@@ -582,7 +587,11 @@ function onGroupSave() {
         osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
     }
 }
-
+else 
+{
+	mini.createDismissibleMessage("Project due date should not be less than project start date");
+}
+}
 // Register our on-view-load handler
 gadgets.util.registerOnLoadHandler(init);
 </script>
@@ -591,36 +600,54 @@ gadgets.util.registerOnLoadHandler(init);
 
 <body>
 <div id="stylized" class="myform">
-	<div id="group-div" class="top-level-div">
-	<legend>AI Deal Room Creator</legend>
-		<table class="j-table">
-		
-	
-		<label>Deal Room Name
+<table>
+<tr>
 
-</label>
-<input id="group-name" class="group-input" type="text"/>
-		  
-		   <label>Project Start Date:</label>
+ <td colspan="2">
+ <div id="group-div" class="top-level-div">
+	<legend>AI Deal Room Creator</legend><td></div>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+	<tr>
+	 <td >
+		<table class="j-table">
+		<tr> <td>
+			
+		<label>Deal Room Name:</label></td>
+		
+
+	
+	<td>
+<input id="group-name" class="group-input" type="text"/></td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>		  
+<tr><td>		   <label>Project Start Date:</label></td>
 
 		        
-		            <input id="project-start-date" type="text"/>
-		        <label>Project Due Date</label>
+<td>		            <input id="project-start-date" type="text"/></td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr><td>		        <label>Project Due Date:</label></td>
 
-		            <input id="project-due-date" type="text"/></tr>
-					
-		            <button id="group-create-button" align="center" size="100px">Create Deal Room</button>		        </td>
+<td>		            <input id="project-due-date" type="text"/></td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr><td>&nbsp</td><td align="center">	
+<input type="button" id="group-create-button" align="center" size="50px" value="Create Deal Room"> 
+		            		        </td>
+</tr>
 				
-		</table>
 		
+	<tr>
+	<td colspan="2">
 		         
-		        </td>
-		    </tr>
-		</table>
+		        
+		
 		<div class="spacer"></div>
 	</div>
-	<div id="response-message"></div>
-	
+	<div id="response-message"></div></td>
+	</tr>
+	</table>
 </div>
 </body>
 </html>

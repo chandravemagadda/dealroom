@@ -410,8 +410,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Documents
 function loadDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all',
-	place : source
+        fields : '@all'//,
+	//place : source
     }).execute(onDocFetch);
 }
 
@@ -426,8 +426,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Project Documents
 function loadProjDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all',
-	place : source
+        fields : '@all'//,
+	//place : source
     }).execute(onProjDocFetch);
 }
 
@@ -518,7 +518,7 @@ function onGroupCreated(response) {
 	gMessage.innerHTML = "Group successfully created. <br /> Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the group";
 	// Add GROUP Content-Copying here!
 	loadDiscussions(templateSpace);
-    //loadDocuments(templateSpace);
+    loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
 	loadBlogs();

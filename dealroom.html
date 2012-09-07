@@ -22,7 +22,7 @@ var templateSpace = "/places/2201"; //actually, a SPACE
 
 var templateSpaceURI = "https://apps-public-cloud-trunk.jivesoftware.com/groups/deal-room-template-group";
 //var templateSpaceURI = "https://accenture.jiveon.com/community/deal-room-template";
-var templateProject = "/places/1029";
+var templateProject = "/places/2294";
 var templateProjectURI = "https://accenture.jiveon.com/community/deal-room-template/projects/rfp-response-template-project";
 
 // Flag indicating we are in add mode
@@ -491,7 +491,7 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	//loadTasks(templateProject);
+	loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
 	loadProjDiscussions(templateProject);
     loadProjDocuments(templateProject);

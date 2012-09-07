@@ -357,7 +357,7 @@ function onBlogFetch(response) {
 	postBlog.type = group.type;
 	postBlog.name = group.name;
 	postBlog.displayName = group.displayName;
-	postBlog.question = group.question;
+	//postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
 	//console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
@@ -461,10 +461,10 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 //Loading Blogs
-function loadBlogs() {
+function loadBlogs(source) {
 osapi.jive.corev3.blogs.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onBlogFetch);
 }
 
@@ -522,7 +522,7 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
-	//loadBlogs();
+	loadBlogs(templateSpace);
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	

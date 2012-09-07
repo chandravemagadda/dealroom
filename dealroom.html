@@ -339,11 +339,13 @@ function onCheckPointFetch(response) {
 
 //Fetching Blogs
 function onBlogFetch(response) {
+  console.log ("Blog insideeeeeeeeeeeeeeeeeeeeee");
     if (response.error) {
         mini.createDismissibleMessage("Unable to fetch blogs: " + response.error.message);
         return;
     }
     var blogs = response.list;
+	console.log ("Blog blogsssssssssssssssssss"+JSON.stringify(blogs));
 	var postBlog;
 	
 	$.each(blogs, function(index, group) {
@@ -359,7 +361,7 @@ function onBlogFetch(response) {
 	postBlog.displayName = group.displayName;
 	postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
-	//console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
+	console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
 	});
     //console.log ("Blogs: "+JSON.stringify(blogs));
@@ -461,10 +463,10 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 //Loading Blogs
-function loadBlogs() {
+function loadBlogs(source) {
 osapi.jive.corev3.blogs.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onBlogFetch);
 }
 

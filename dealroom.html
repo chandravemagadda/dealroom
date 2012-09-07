@@ -464,8 +464,8 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 //Loading Blogs
 function loadBlogs() {
 osapi.jive.corev3.blogs.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onBlogFetch);
 }
 
@@ -521,7 +521,7 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
-	//loadBlogs();
+	loadBlogs();
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	

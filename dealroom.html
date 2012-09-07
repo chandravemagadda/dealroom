@@ -67,7 +67,7 @@ function ISODateString(d){
 
 function onContentCreated (response) {
     if (response.error) {
-        mini.createDismissibleMessage("Unable to create discussions: " + response.error.message);
+        mini.createDismissibleMessage("Unable to create content: " + response.error.message);
         return;
     }
 }
@@ -426,8 +426,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Project Documents
 function loadProjDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onProjDocFetch);
 }
 
@@ -492,8 +492,8 @@ function onProjectCreated(response) {
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
 	//loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
-	//loadProjDiscussions(templateProject);
-    //loadProjDocuments(templateProject);
+	loadProjDiscussions(templateProject);
+    loadProjDocuments(templateProject);
 	}
 }
 

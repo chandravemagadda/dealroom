@@ -462,10 +462,10 @@ osapi.jive.corev3.places.Project.getCheckpoints().execute(onCheckPointFetch);
 }
 
 //Loading Blogs
-function loadBlogs() {
+function loadBlogs(source) {
 osapi.jive.corev3.blogs.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onBlogFetch);
 }
 
@@ -492,7 +492,7 @@ function onProjectCreated(response) {
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
 	//loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
-	loadProjDiscussions(templateProject);
+	//loadProjDiscussions(templateProject);
     //loadProjDocuments(templateProject);
 	}
 }
@@ -521,7 +521,7 @@ function onGroupCreated(response) {
     loadDocuments(templateSpace);
     //loadFiles(templateSpace);	
 	loadPolls(templateSpace);
-	loadBlogs();
+	loadBlogs(templateSpace);
 	//loadAttachments(templateSpaceURI);
 	//Project creation within the newly created group
 	

@@ -361,7 +361,7 @@ function onBlogFetch(response) {
 	postBlog.displayName = group.displayName;
 	postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
-	console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
+	console.log ("Blog yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+postBlog.displayName+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
 	});
     console.log ("Blogs: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx::: "+JSON.stringify(blogs));

@@ -410,8 +410,8 @@ osapi.jive.corev3.discussions.get ({
 //Loading Documents
 function loadDocuments(source) {
 osapi.jive.corev3.documents.get ({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onDocFetch);
 }
 
@@ -435,8 +435,8 @@ osapi.jive.corev3.documents.get ({
 //Loading Tasks
 function loadTasks(source) {
 osapi.jive.corev3.tasks.get({
-        fields : '@all'//,
-	//place : source
+        fields : '@all',
+	place : source
     }).execute(onTaskFetch);
 }
 
@@ -490,9 +490,9 @@ function onProjectCreated(response) {
 	//mini.createDismissibleMessage("Project created with the ID: " + response.id);
 	var gMessage = document.getElementById("response-message");
 	gMessage.innerHTML = gMessage.innerHTML + "<br />Click <a href=\""+response.resources.html.ref+"\">here</a> to visit the Project";
-	loadTasks(templateProject);
+	//loadTasks(templateProject);
 	//loadCheckPoints(templateProject);
-	loadProjDiscussions(templateProject);
+	//loadProjDiscussions(templateProject);
     //loadProjDocuments(templateProject);
 	}
 }

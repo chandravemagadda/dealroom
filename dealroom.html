@@ -358,7 +358,7 @@ function onBlogFetch(response) {
 	postBlog.type = group.type;
 	postBlog.name = group.name;
 	postBlog.displayName = group.displayName;
-	postBlog.question = group.question;
+	//postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
 	//console.log ("Blog "+index+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);

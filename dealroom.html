@@ -47,7 +47,7 @@ var targetProjID = "";
 
 // On view load, wire up static actions and retrieve initial data
 function init() {
-    osapi.jive.corev3.people.getViewer({}).execute(function(response) {});
+   // osapi.jive.corev3.people.getViewer({}).execute(function(response) {});
     $("#group-create-button").click(onGroupSave);
     mini = new gadgets.MiniMessage();
 }
@@ -91,7 +91,7 @@ function onDiscFetch(response) {
 		type : ""
 	},
 	question : "",
-	//parent : ""
+	parent : ""
 	}
 	
 	postDisc.type = group.type;

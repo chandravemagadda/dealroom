@@ -344,13 +344,13 @@ function onCheckPointFetch(response) {
 
 //Fetching Blogs
 function onBlogFetch(response) {
-  console.log ("Blog insideeeeeeeeeeeeeeeeeeeeee");
+  //console.log ("Blog insideeeeeeeeeeeeeeeeeeeeee");
     if (response.error) {
         mini.createDismissibleMessage("Unable to fetch blogs: " + response.error.message);
         return;
     }
     var blogs = response.list;
-	console.log ("Blog blogsssssssssssssssssss"+JSON.stringify(blogs));
+	//console.log ("Blog blogsssssssssssssssssss"+JSON.stringify(blogs));
 	var postBlog;
 	
 	$.each(blogs, function(index, group) {
@@ -366,10 +366,10 @@ function onBlogFetch(response) {
 	postBlog.displayName = group.displayName;
 	postBlog.question = group.question;
 	postBlog.parent = targetGroupID;
-	console.log ("Blog yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+postBlog.displayName+" :"+JSON.stringify(postBlog));
+	//console.log ("Blog yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+postBlog.displayName+" :"+JSON.stringify(postBlog));
 	osapi.jive.corev3.blogs.create(postBlog).execute(onContentCreated);
 	});
-    console.log ("Blogs: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx::: "+JSON.stringify(blogs));
+    //console.log ("Blogs: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx::: "+JSON.stringify(blogs));
 }
 
 //Fetching Blogs
@@ -569,25 +569,32 @@ function onGroupCreated(response) {
 
 function onGroupSave() {
 //console.log("creating group............");
-    group = {
-        displayName : "",
-        description : "",
-        followerCount : 0,
-        groupType : "",
-        memberCount : 0,
-        name : "",
-        type : "group"
-    };
+	var projectStartDate = $("#project-start-date").val();
+	var projectDueDate = $("#project-due-date").val();	
+	
+	if(projectStartDate<projectDueDate) {
+		group = {
+			displayName : "",
+			description : "",
+			followerCount : 0,
+			groupType : "",
+			memberCount : 0,
+			name : "",
+			type : "group"
+		};
 
-    group.description = $("#group-name").val();
-    group.description = "This is a deal room created for collaborating on the deal \"" + group.description + "\"";
-    group.displayName = $("#group-name").val();
-    group.groupType = "PRIVATE";
-    group.contentTypes = [ "documents", "files", "discussions", "polls", "projects" ];
-    group.name = $("#group-name").val();
-    if (adding) {
-        osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
-    }
+		group.description = $("#group-name").val();
+		group.description = "This is a deal room created for collaborating on the deal \"" + group.description + "\"";
+		group.displayName = $("#group-name").val();
+		group.groupType = "PRIVATE";
+		group.contentTypes = [ "documents", "files", "discussions", "polls", "projects" ];
+		group.name = $("#group-name").val();
+		if (adding) {
+			osapi.jive.corev3.groups.create(group).execute(onGroupCreated);
+		}
+	} else {
+		mini.createDismissibleMessage("Project due date should not be less than project start date");
+	}
 }
 
 // Register our on-view-load handler
